@@ -5,73 +5,54 @@
 ====
 \label{sec:eval}
  -->
-In order to evaluate that GameRank has good performance, we conduct a
-series of experiments. In this section we evaluate GameRank, by comparing its results on MLB data with some prestigious
-ranking approaches. These ratings include ESPN Ratings\cite{espn}, Elias
-Ratings, Inside Edge Rating, and The Baseball Encyclopedia Rating, which
-are all introduced in \cite{ratings}.
 
-We collect ranking results of all these metrics in \cite{ranking_data},
-including rankings from year 2008 to 2013. We do not have play-by-play
-data for 2013 on Retrosheet\cite{retrosheet}, so we only compare the
-rankings from 2008 to 2012.
+为了评估GameRank的性能和准确度，我们进行了一系列实验。
+在本章中，我们通过比较GameRank的排名结果和一些现有的著名排名，对GameRank进行了评估。
+这些现有的排名方法包括 ESPN Ratings\cite{espn}， Elias
+Ratings， Inside Edge Rating， 以及 The Baseball Encyclopedia (TBE)Rating。这些排名都在 \cite{ratings} 中有所介绍。
+
+我们从网页数据\cite{ranking_data} 中，
+爬取了从2008年到2013年，这四种排名方法的排名结果。
+我们在Retrosheet\cite{retrosheet}中没有play-by-play的数据，因此我们只进行了从2008年到2012年的数据的比较。
 
 
-Introduction on Different Ratings
+各排名方法介绍
 ====
 
-In ESPN Ratings, batters, starting pitchers and relievers are separated
-into different ranking groups.  For each group, it calculates the
-weighted average of all the factors as a single score to describe the
-players' value. As an example, the ESPN rating of batters are calculated
-by gathering the following factors:  batting bases accumulated, runs
-produced, OBP, BA, HRs, RBIs, runs, hits, net steals, team win
-percentage, difficulty of defensive position, etc. It includes more than
-10 factors. Both of the other groups also include more than 5 factors.
+在 ESPN Ratings中，打击员、先发投手和中继投手，被分到不同的排名组中。
+在每个组里，通过计算各项指标的加权平均值，来得到一个一维的分数，来衡量球员在排名组中的水平。
+例如，打击员的 ESPN rating 由一下指标加权计算而来：垒打数、得分数、上垒率、安打率、本垒打数、打点、安打数、偷垒数、队伍胜率、守备位置难度，等等。它包括10个以上的指标，另外两个排名组里也都包含至少5个指标。
 
-Similarly, The Baseball Encyclopedia Ratings is also based on "linear
-weights that assigns a value to every event in the course of a baseball
-game."
+类似地，The Baseball Encyclopedia Ratings也是基于各项指标的线性加和，算出一个分数来评价每个选手。
 
-Inside Edge Rating is the most related to GameRank: it uses a pitch-by-
-pitch rather than play-by-play method, where every pitch is given a
-value, and winners in these competitions will gain some fixed points and
-losers will lose points. But it still misses the relationships between
-different players: winning a top batter and a bottom batter would give
-same points to a pitcher. So it still ignores the impact of opponents in
-evaluating players.
+Inside Edge Rating 是与GameRank最相关的：它 将更为细致的每次投球的情况，而不是每个局面的情况计入统计。
+每次投球被赋予一个分数，在这次投球中，打击员和投手中的竞争胜者将会得到一个固定的分数，负者将会失去一个固定的分数。
+但这个方法仍然未能考虑球员之间的关系：如果一个投手赢了一个很厉害的打击员，和赢了一个很弱的打击员会获得一样的分数。
+因此这个方法仍然忽略了对手在评估中的作用。
 
-Elias Ratings evaluate the difference in the team's chance to win, by
-simulating the game before and after the involvement of certain batters
-and pitchers, in the context of game situations and stadium effects. Its
-ratings are produced by large-scale computer simulations over many
-innings of games.
+Elias Ratings 通过模拟比赛中，待评估球员是否参与这次比赛，对这次比赛胜率的影响。它考虑了各种比赛情境和场地环境，大规模地运行一个比赛模拟器，对比赛局面来进行电脑模拟，从而完成对每名球员的评估。
 
-We argue that all those ratings are unnatural and inadequate: some of
-them involves computing the weighted average of many statistics of
-players, simply summing up a bunch of indicators; others are more
-complex methods but still ignoring the impact of opponents on evaluating
-players. None of those indicators can take the detailed relationships
-among players into consideration.
+我们认为，所有这些排名都有一定的不足之处：有些排名仅仅通过计算各种指标的加权平均来陪你姑姑球员，也有的使用了更复杂的办法但仍然忽略了对手的实力对于评估的影响。
+这些指标都无法在评估中体现球员之间的关系。
 
-What is worse, a lot of players fail to get a score according to these
-algorithms, thus a large number of players cannot get a rank, while our
-GameRank algorithm can rank all the players according to game data. In
-Table \ref{table:ranked_players}, we show the number of ranked pitchers
-and batters of all the metrics. Note that GameRank can measure both
-pitching and batting abilities for all players, but not all players are
-batters as well as pitchers. Most batters do not pitch, and a few
-pitchers do not hit. We still measure their both abilities, and list them
-in the table.
+更严重的是，许多球员在这些排名中无法被评估，因为很多人通过这个计算方法算不出得分。
+我们的GameRank 算法就可以通过比赛数据，对所有球员进行排序。
+在表 \ref{table:ranked_players}中，
+我们展示了各种方法能够排名的投手和打击员的数目。
+我们注意到 GameRank 可以衡量所有球员投球和打击的能力，
+但并非所有球员都既是打击员又是投手。
+大部分打击员不会做投手，也有一部分投手不会打击。这些人都被排在相应榜单的最后位置。
+<!-- TODO -->
 
-Compared to other Ratings, our algorithm is simpler, more natural,
-considers the impact of opponents in player evaluation, and covers a
-larger majority.
+
+跟其他方法相比，
+我们的方法更加简单、自然，可以考虑对手的实力对评估的影响，
+并覆盖了更多的球员。
 
 
 \begin{table}[!t]
 \centering
-\caption{Number of Ranked Players from 2008 to 2012}
+\caption{从 2008 年到 2012年的被排名球员数目}
 \label{table:ranked_players}
 \begin{tabular}{rrrrrr}
 \hline
@@ -79,67 +60,69 @@ Metrics & Elias & ESPN & GameRank & Inside-edge & TBE\\
 \hline
 \hline
 2008 sum. & 1282 & 367 & 2582 & 818 & 500\\
-batting & 636 & 214 & 1291 & 430 & 224\\
-pitching & 646 & 153 & 1291 & 388 & 276\\
+打击能力 & 636 & 214 & 1291 & 430 & 224\\
+投球能力 & 646 & 153 & 1291 & 388 & 276\\
 \hline
 2009 sum. & 1256 & 472 & 2532 & 959 & 483\\
-batting & 607 & 322 & 1266 & 482 & 220\\
-pitching & 649 & 150 & 1266 & 477 & 263\\
+打击能力 & 607 & 322 & 1266 & 482 & 220\\
+投球能力 & 649 & 150 & 1266 & 477 & 263\\
 \hline
 2010 sum. & 1240 & 475 & 2498 & 1212 & 480\\
-batting & 616 & 319 & 1249 & 598 & 214\\
-pitching & 624 & 156 & 1249 & 614 & 266\\
+打击能力 & 616 & 319 & 1249 & 598 & 214\\
+投球能力 & 624 & 156 & 1249 & 614 & 266\\
 \hline
 2011 sum. & 1286 & 471 & 2590 & 1127 & 462\\
-batting & 638 & 310 & 1295 & 557 & 202\\
-pitching & 648 & 161 & 1295 & 570 & 260\\
+打击能力 & 638 & 310 & 1295 & 557 & 202\\
+投球能力 & 648 & 161 & 1295 & 570 & 260\\
 \hline
 2012 sum. & 1272 & 459 & 2568 & 1131 & 512\\
-batting & 628 & 301 & 1284 & 558 & 229\\
-pitching & 644 & 158 & 1284 & 573 & 283\\
+打击能力 & 628 & 301 & 1284 & 558 & 229\\
+投球能力 & 644 & 158 & 1284 & 573 & 283\\
 \hline
-Total & 6336 & 2244 & 12770 & 5247 & 2437\\
+汇总 & 6336 & 2244 & 12770 & 5247 & 2437\\
 \hline
 \end{tabular}
 \end{table}
 
 
 
+
+GameRank与其他排名的结果相似性
+====
+
+
 \begin{figure*}[!t]
 \centering
-\subfigure[GameRank v.s. Others in 2008]{ 
+\subfigure[GameRank与其他排名的对比：2008年]{ 
     \includegraphics[width=0.32\textwidth]{img/compare/combine-2008.eps}
 }
-\subfigure[GameRank v.s. Others in 2009]{
+\subfigure[GameRank与其他排名的对比：2009年]{
     \includegraphics[width=0.32\textwidth]{img/compare/combine-2009.eps}
 }
-\subfigure[GameRank v.s. Others in 2010]{
+\subfigure[GameRank与其他排名的对比：2010年]{
     \includegraphics[width=0.32\textwidth]{img/compare/combine-2010.eps}
 }
-\subfigure[GameRank v.s. Others in 2011]{
+\subfigure[GameRank与其他排名的对比：2011年]{
     \includegraphics[width=0.32\textwidth]{img/compare/combine-2011.eps}
 }
-\subfigure[GameRank v.s. Others in 2012]{
+\subfigure[GameRank与其他排名的对比：2012年]{
     \includegraphics[width=0.32\textwidth]{img/compare/combine-2012.eps}
 }
-\caption{Comparison between GameRank and other rankings}
+\caption{GameRank与其他排名的对比CDF}
 \label{fig:compare}
 \end{figure*}
 
 
-Result Similarity of GameRank and Other Ratings
-====
+基于从2008年到2012年GameRank的结果以及其他排名的结果，
+我们比较了同一球员在GameRank和其他排名方法中得到的排名值，
+发现GameRank与其他排名的结果比较相似。
 
-Based on the GameRank results as well as other rankings from 2008 to
-2012, we compare the rankings certain players get in GameRank and other
-rankings, to prove that GameRank generates similar results to other
-methods.
+具体地，当我们比较 GameRank 和另一个排名方法 $X$的结果时，
+我们先对他们的结果进行归一化：
+我们选取在两个排名中都得到排名的球员（$X$排名的球员集合为GameRank排名的球员的子集），投手和打击员分开，
+然后分别对这些选定的投手和打击员进行排序，得到新的集合中，GameRank和$X$分别的排名值。这样，每一球员的两个排名值就有相同的分母，可以进行比较。
+例如，参考表\ref{table:ranked_players}，比较2008年的ESPN和GameRank时，我们抽出214个打击员和153个投手进行排名的归一化；归一化后，ESPN和GameRank的打击排名都在区间$[1,214]$内，投手排名都在区间$[1,153]$内。
 
-Specifically, when we compare GameRank and another ranking $X$, we
-normalize their rankings by selecting the players, who is both ranked in
-GameRank and $X$. (Actually, players who have $X$ ratings are a
-subset of those who have GameRank values)  Then we separately sort all
-the selected pitchers and batters by their GameRank as well as $X$, and the results can be compared. 
 <!-- 
 % $GR rank$; similarly we sort the players by ESPN ratings and get $ESPN
 % rank$. Therein, both $GRPitchingRank$ and $ESPNPitchingRank$ have a
@@ -152,26 +135,24 @@ the selected pitchers and batters by their GameRank as well as $X$, and the resu
 % two ranks are.
  -->
 
-We then plot Cumulative Distribution Functions (CDFs) to see the
-distribution of absolute difference values between players' GameRank and
-$X$ rank value, in Figure \ref{fig:compare}. For example, pitcher
-Clayton Kershaw ranks No.2 in GameRank in 2012, and ranks No.5 in ESPN
-Rank in 2012, so the absolute difference value is 3, in the comparison
-of GameRank and ESPN pitcher rankings in 2012.  The horizontal axis
-refers to $\frac{|GRrank - OtherRank|}{PlayerNum}$, where $PlayerNum$ is the
-total number of pitchers or batters in the relative rankings, which can
-be referred to in Table \ref{table:ranked_players}. And the vertical axis
-is its cumulative function, i.e. how many players have the difference
-below this value. The difference value shows the closeness of the two
-ranks.
+之后，我们绘制了累积分布函数图 （CDF）， 
+来观察球员的GameRank和其他排名之间的绝对差，见图表\ref{fig:compare}。
+例如，2012年， 投手 Clayton Kershaw 在GameRank中排名第2位，在ESPN中排名第5位，
+则绝对差为3，体现在2012年GameRank和ESPN的比较中。
+图表\ref{fig:compare}中，每条曲线是GameRank和一种排名的比较。
+横轴为球员在两种排名中的“排名比例”的差值的绝对值，在$(0,1]$之间，其值为 $\frac{|GRrank - OtherRank|}{PlayerNum}$, 其中 $PlayerNum$ 是
+相关的排名中总的投手或打击员的数目，与表\ref{table:ranked_players}中相同。
+纵轴为累积函数， 即有多大比例球员的这一值（两种排名绝对差所占球员比例），在横轴对应的数目以下。
 
-From the plots we can see that GameRank achieve similar results to these
-prestigious rankings. Its results are most close to Inside-Edge (IE)
-Rankings, which is in accordance to our analysis above. Besides, the
-batter ranks are closer than the pitcher ranks. Take year 2008 as an
-example, There are about 60\% batters that has GR and IE ranks with a
-difference less than $10\% \times 430 = 43$. Similarly, for over 80\%
-players the difference is less than 20\%.
+从这些图表中，我们可以看到GameRank (GR) 与其他几个著名的排名有着类似的结果。
+跟GameRank最相似的是 Inside-Edge (IE) 排名，
+这与我们上面的分析相符。
+另外，GameRank与其他排名相比，打击员的排名比起投手的排名更加接近。
+以2008年为例，有大约 60\% 的打击员 GR 和 IE 排名的差值小于 $10\% \times 430 = 43$；类似地，有超过 80\% 的打击员这一差值小于 20\%。
+而比较投手的排名，只有大约 40\% 的投手 GR 和 IE 排名的差值小于 $10\% \times 388 = 38.8$；类似地，只有大约 60\% 的投手这一差值小于20\%。
+
+
+<!--TODO add random!!!-->
 
 <!-- 
 % for 50\% batters, the difference between
