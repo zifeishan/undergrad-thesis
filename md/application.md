@@ -29,6 +29,7 @@
 
 \begin{table}[!t]
 \centering
+\small
 \caption{不同局面下边的权值分配}
 \label{table:weight}
 \begin{tabular}{rrr}
@@ -43,7 +44,6 @@
 打击边 & 保送 & 0.5\\
 打击边 & 其他情况 & 0.5\\
 投球边 & 所有情况 & 1\\
-
 \hline
 \end{tabular}
 \end{table}
@@ -53,52 +53,52 @@
 计算结果
 ====
 
-作为棒球网络排名的结果，我们在表\ref{table:topbat}中列出了近五年内的“十大打击员”，在表 \ref{table:toppit} 中列出了“十大投手”。 
-这些名列前茅的球员，也符合人们对年度明星球员的直觉。
-并且，这些排名结果与一些现行的著名排名结果相近，这将会在下一章节中进行分析。
-
-\small
-\begin{table*}[!t]
+\begin{table*}[!h]
 \centering
-\caption{Top Batters in recent 5 years}
+\small
+\caption{GameRank: 近五年打击榜前十名}
 \label{table:topbat}
 \begin{tabular}{rccccc}
 \hline
 Rank & 2008 & 2009 & 2010 & 2011 & 2012\\
 \hline
-1 & David Wright & Prince Fielder & Carlos Gonzalez & Matt Kemp & Ryan Braun\\
-2 & Chase Utley & Ryan Braun & Albert Pujols & Prince Fielder & Chase Headley\\
-3 & Albert Pujols & Ryan Howard & Joey Votto & Justin Upton & Andrew Mc Cutchen\\
-4 & Carlos Beltran & Albert Pujols & Matt Holliday & Hunter Pence & Aramis Ramirez\\
-5 & Carlos Delgado & Adrian Gonzalez & David Wright & Joey Votto & Miguel Cabrera\\
-6 & Ryan Howard & Mark Reynolds & Dan Uggla & Ryan Braun & Aaron Hill\\
-7 & Lance Berkman & Derrek Lee & Ryan Braun & Albert Pujols & Buster Posey\\
-8 & Adrian Gonzalez & Chase Utley & Kelly Johnson & Troy Tulowitzki & Adam La Roche\\
-9 & Matt Holliday & Andre Ethier & Adrian Gonzalez & Adrian Gonzalez & Martin Prado\\
-10 & Ryan Braun & Ryan Zimmerman & Jayson Werth & Jacoby Ellsbury & David Wright\\
+1 & D. Wright & P. Fielder & C. Gonzalez & M. Kemp & R. Braun\\
+2 & C. Utley & R. Braun & A. Pujols & P. Fielder & C. Headley\\
+3 & A. Pujols & R. Howard & J. Votto & J. Upton & A. Mc Cutchen\\
+4 & C. Beltran & A. Pujols & M. Holliday & H. Pence & A. Ramirez\\
+5 & C. Delgado & A. Gonzalez & D. Wright & J. Votto & M. Cabrera\\
+6 & R. Howard & M. Reynolds & D. Uggla & R. Braun & A. Hill\\
+7 & L. Berkman & D. Lee & R. Braun & A. Pujols & B. Posey\\
+8 & A. Gonzalez & C. Utley & K. Johnson & T. Tulowitzki & A. La Roche\\
+9 & M. Holliday & A. Ethier & A. Gonzalez & A. Gonzalez & M. Prado\\
+10 & R. Braun & R. Zimmerman & J. Werth & J. Ellsbury & D. Wright\\
 \hline
 \end{tabular}
 \end{table*}
 
-\small
-\begin{table*}[!t]
+\begin{table*}[!h]
 \centering
-\caption{Top Pitchers in recent 5 years}
+\small
+\caption{GameRank: 近五年投手榜前十名}
 \label{table:toppit}
 \begin{tabular}{rccccc}
 \hline
 Rank & 2008 & 2009 & 2010 & 2011 & 2012\\
 \hline
-1 & Dan Haren & Adam Wainwright & Roy Halladay & Cliff Lee & R A Dickey\\
-2 & Cole Hamels & Tim Lincecum & Chris Carpenter & Matt Cain & Clayton Kershaw\\
-3 & Johan Santana & Ubaldo Jimenez & Adam Wainwright & Clayton Kershaw & Johnny Cueto\\
-4 & Brandon Webb & Zach Duke & Matt Cain & Daniel Hudson & Homer Bailey\\
-5 & Tim Lincecum & Bronson Arroyo & Cole Hamels & Chris Carpenter & Mat Latos\\
-6 & C C Sabathia & Josh Johnson & Dan Haren & Roy Halladay & Cole Hamels\\
-7 & Roy Oswalt & Dan Haren & Brett Myers & Tim Lincecum & Ian Kennedy\\
-8 & Ryan Dempster & Javier Vazquez & Tim Lincecum & Ian Kennedy & Matt Cain\\
-9 & Ted Lilly & Matt Cain & Tim Hudson & Tim Hudson & Wandy Rodriguez\\
-10 & Ricky Nolasco & Jason Marquis & Randy Wolf & Randy Wolf & Kyle Lohse\\
+1 & D. Haren & A. Wainwright & R. Halladay & C. Lee & R. A Dickey\\
+2 & C. Hamels & T. Lincecum & C. Carpenter & M. Cain & C. Kershaw\\
+3 & J. Santana & U. Jimenez & A. Wainwright & C. Kershaw & J. Cueto\\
+4 & B. Webb & Z. Duke & M. Cain & D. Hudson & H. Bailey\\
+5 & T. Lincecum & B. Arroyo & C. Hamels & C. Carpenter & M. Latos\\
+6 & C. C Sabathia & J. Johnson & D. Haren & R. Halladay & C. Hamels\\
+7 & R. Oswalt & D. Haren & B. Myers & T. Lincecum & I. Kennedy\\
+8 & R. Dempster & J. Vazquez & T. Lincecum & I. Kennedy & M. Cain\\
+9 & T. Lilly & M. Cain & T. Hudson & T. Hudson & W. Rodriguez\\
+10 & R. Nolasco & J. Marquis & R. Wolf & R. Wolf & K. Lohse\\
 \hline
 \end{tabular}
 \end{table*}
+
+作为棒球网络排名的结果，我们在表\ref{table:topbat}中列出了近五年内的“十大打击员”，在表 \ref{table:toppit} 中列出了“十大投手”。 
+这些名列前茅的球员，也符合人们对年度明星球员的直觉。
+并且，这些排名结果与一些现行的著名排名结果相近，这将会在下一章节中进行分析。

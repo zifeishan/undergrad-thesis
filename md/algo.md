@@ -242,7 +242,7 @@ GameRank的计算方法
   $GR_{BA} \leftarrow NewGR_{BA}$\;
  }
  \KwRet{$GR_{AB}, GR_{BA}$}
- \caption{Compute GameRank}
+ \caption{计算带权网络的GameRank值}
 \end{algorithm}
 
 
