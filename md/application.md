@@ -29,7 +29,6 @@
 
 \begin{table}[!t]
 \centering
-\small
 \caption{不同局面下边的权值分配}
 \label{table:weight}
 \begin{tabular}{rrr}
@@ -53,7 +52,7 @@
 计算结果
 ====
 
-\begin{table*}[!h]
+\begin{table*}[!p]
 \centering
 \small
 \caption{GameRank: 近五年打击榜前十名}
@@ -76,7 +75,7 @@ Rank & 2008 & 2009 & 2010 & 2011 & 2012\\
 \end{tabular}
 \end{table*}
 
-\begin{table*}[!h]
+\begin{table*}[!p]
 \centering
 \small
 \caption{GameRank: 近五年投手榜前十名}
@@ -102,3 +101,4 @@ Rank & 2008 & 2009 & 2010 & 2011 & 2012\\
 作为棒球网络排名的结果，我们在表\ref{table:topbat}中列出了近五年内的“十大打击员”，在表 \ref{table:toppit} 中列出了“十大投手”。 
 这些名列前茅的球员，也符合人们对年度明星球员的直觉。
 并且，这些排名结果与一些现行的著名排名结果相近，这将会在下一章节中进行分析。
+

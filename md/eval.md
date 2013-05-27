@@ -94,19 +94,19 @@ GameRank与其他排名的结果相似性
 \begin{figure*}[!t]
 \centering
 \subfigure[GameRank与其他排名的对比：2008年]{ 
-    \includegraphics[width=0.32\textwidth]{img/compare/combine-2008.eps}
+    \includegraphics[width=0.45\textwidth]{img/compare/combine-2008.eps}
 }
 \subfigure[GameRank与其他排名的对比：2009年]{
-    \includegraphics[width=0.32\textwidth]{img/compare/combine-2009.eps}
+    \includegraphics[width=0.45\textwidth]{img/compare/combine-2009.eps}
 }
 \subfigure[GameRank与其他排名的对比：2010年]{
-    \includegraphics[width=0.32\textwidth]{img/compare/combine-2010.eps}
+    \includegraphics[width=0.3\textwidth]{img/compare/combine-2010.eps}
 }
 \subfigure[GameRank与其他排名的对比：2011年]{
-    \includegraphics[width=0.32\textwidth]{img/compare/combine-2011.eps}
+    \includegraphics[width=0.3\textwidth]{img/compare/combine-2011.eps}
 }
 \subfigure[GameRank与其他排名的对比：2012年]{
-    \includegraphics[width=0.32\textwidth]{img/compare/combine-2012.eps}
+    \includegraphics[width=0.3\textwidth]{img/compare/combine-2012.eps}
 }
 \caption{GameRank与其他排名的对比CDF}
 \label{fig:compare}
@@ -164,6 +164,93 @@ GameRank与其他排名的结果相似性
 % rank is $[1, 310]$, it comes out that the GR ranks are more close to
 % ESPN ranks in terms of batting than pitching.
  -->
+
+胜率有序性分析
+====
+
+作为一个更有力的验证方法，
+我们希望研究，在不同排名方法中，是否高排名的球员能够打败低排名的对手。
+已知网络中每对选手之间的胜率，我们通过在不同排名中比较选手胜率与排名的关系，刻画这一排名的"胜率无序度"。
+
+具体地，当我们比较GameRank和排名方法 $X$ 时, 
+我们选取在两个排名方法中都被排名的投手$RankedPitchers$，
+将他们分别按排名排序，
+得到两个排序后的数组 $Pit_{GR}$ 和 $Pit_{X}$。
+对年度的每个打击员 $b$ ，我们选取所有
+$b$ 面对一个$RankedPitchers$中投手$p$的局面，
+计算出当年$b$对$p$的胜率
+$win(b,p)$，这是一个 $[0,1]$之间的小数。
+我们将所有 $win(b,p)$ 按照 $p$ 在 $Pit_{GR}$ 和 $Pit_{X}$ 中出现的顺序摆放，得到新的数组 $win_{GR}$ 和 $win_{X}$。
+例如： 假如$win_{GR} =
+[0.1,0.2,0.3,0.4...]$，则它意味着 $b$ 面对第一名的投手有 $10\%$ 的胜率，面对 第二名的投手有 $20\%$ 的胜率，等等。
+
+理想情况下，如果所有打者都能对低排名投手取得更高的胜率，那这个投手排名是最"有序"的。
+如何量化排名的有序度呢？我们对 $win_{GR}$ 和 $win_{X}$ 中的*逆序对*进行加权计数。
+假设一般地，对于打击员来说，比起高排名投手，低排名投手是更容易战胜的，则逆序对个数可以代表投手排序的无序程度。
+逆序对的*加权计数*指，并非统计逆序对个数，而是统计每个逆序对中的胜率差值之和。
+例如，如果一个打击员对排名第一的投手胜率为0.5，排名第二的投手胜率为0.1，则这个逆序对的权为$0.5-0.1=0.4$；逆序对中两个胜率相差越悬殊，我们认为这是越大的反常现象，因此权值越高。
+
+为了将方法进行正规化，假设 $IP_{GR}$ 是
+$win_{GR}$ 中逆序对差值之和，则我们研究 $IP_{GR}$ 除以数组中最大可能逆序对个数$C^2_{N}$ 的比例：
+$R_{GR} = IP_{GR} / C^2_{N}$，其中 $N$ 是数组中的投手数目，这样就消除了结点数目带来的效应。
+$R_{GR}$ 就是对于这一名打击员$b$来说，GameRank中投手排名的"无序度"。
+整体的投手排名无序度，则为所有打击员的$R_{GR}$相加。
+基于以上方法，我们也可以测量打击员的排名无序度。
+
+表 \ref{table:inversion} 展示了其他排名方法与GameRank "无序度" 的不同。 具体地，表中每个元素为 $R_{other} - R_{GR}$。 
+绝大部分元素为正数，这说明GameRank比起其他排名更加 "有序"。
+这一方法验证了如下结论：
+GameRank所得到的排名，比起其他四种排名更能满足如下假设：
+
+#. 一般地，对于投手来说，排名越高的打击员越难战胜。
+#. 一般地，对于打击员来说，排名越高的投手越难战胜。
+
+因此我们认为，GameRank比起其他四种排名方法，都有更好的效果。
+
+<!-- 为什么呢？实际上"无序度"的假设并不适合我们的真实情况：
+例如在投手排名的无序度测量中，
+如果假设每名打击员比起高排名投手都更容易战胜低排名投手，
+就相当于假设了排名越高的投手平均战胜的打击员越多。
+这个假设并未考虑打击员的水平：
+我们不能通过一个球员对所有对手的平均胜率来评判球员，
+实际上战胜越强对手的球员越强。 
+比起GameRank，其他排名对平均数据进行线性加和，理应获得更低的"无序度"，
+但它们不能体现对手强弱带来的影响。
+总之， GameRank具有更高的"无序度" 这一点并没有说明它效果不好，反而支持了它能够考虑球员关系、反映对手实力这一点。
+ -->
+
+\begin{table}[!t]
+\centering
+\caption{其他排名方法比起GameRank的无序度}
+\label{table:inversion}
+\begin{tabular}{rrrrrrrr}
+\hline
+年份 & 类型 & Elias & ESPN & IE & TBE\\
+\hline
+2008 & 打击排名 & 0.0008 & 0.0006 & 0.0002 & 0.0008 \\
+ & 投球排名 & 0.0013 & 0.0023 & 0.0009 & 0.0013 \\
+2009 & 打击排名 & 0.0004 & 0.0006 & 0.0000 & 0.0007 \\
+ & 投球排名 & 0.0013 & 0.0025 & 0.0007 & 0.0015 \\
+2010 & 打击排名 & 0.0006 & 0.0002 & 0.0002 & 0.0008 \\
+ & 投球排名 & 0.0015 & 0.0023 & 0.0007 & 0.0013 \\
+2011 & 打击排名 & 0.0003 & 0.0006 & $-$0.0001 & 0.0005 \\
+ & 投球排名 & 0.0017 & 0.0025 & 0.0010 & 0.0011 \\
+2012 & 打击排名 & 0.0005 & 0.0003 & 0.0000 & 0.0002 \\
+ & 投球排名 & 0.0016 & 0.0025 & 0.0010 & 0.0017 \\
+% 2008 & batting & 0.03\% & $-$0.33\% & $-$0.48\% & 0.58\% \\
+% & pitching & $-$5.07\% & $-$5.32\% & $-$4.59\% & $-$4.03\% \\
+% 2009 & batting & 0.16\% & 0.49\% & $-$0.43\% & 0.47\%\\
+% & pitching & $-$4.91\% & $-$5.87\% & $-$4.40\% & $-$4.74\% \\
+% 2010 & batting & $-$0.07\% & 0.23\% & $-$0.52\% & 0.40\%\\
+% & pitching & $-$5.66\% & $-$6.89\% & $-$4.80\% & $-$4.42\% \\
+% 2011 & batting & $-$0.17\% & 0.73\% & $-$0.46\% & 0.45\%\\
+% & pitching & $-$5.63\% & $-$7.40\% & $-$5.82\% & $-$3.51\% \\
+% 2012 & batting & 0.06\% & 0.69\% & $-$0.50\% & 0.13\%\\
+% & pitching & $-$5.73\% & $-$6.70\% & $-$6.61\% & $-$4.70\% \\
+\hline
+\end{tabular}
+\end{table}
+
 
 <!--
 

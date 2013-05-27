@@ -5,6 +5,9 @@
 ====
 \label{sec:conc} -->
 
+在本文中，我们展示了一个通用的竞技体育网络模型，其中结点为选手，边为选手之间的竞争关系，不同角色的选手之间存在不同的竞争。
+在这个网络上，我们设计了GameRank
+
 In this paper we present a generic network model on competitive sports,
 with players as nodes and their competitions as links. We model the
 network with different competitions between different player roles, and

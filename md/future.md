@@ -1,18 +1,15 @@
-\chapter{Future Work}
+\chapter{未来工作}
 \label{chap:future}
 
-In the future, we want to adopt GameRank on other sports networks, as well as conducting further analysis on the baseball network.
+在未来的工作里，我们希望将GameRank在其他体育网络上加以应用，在棒球网络上进行更多的分析，同时探究利用网络模型进行比赛胜负预测的方法。
 
-First, we want to collect data of American football, soccer, basketball,
-etc., to build networks on these datasets and rank players considering
-competition relationships.
+首先，我们希望收集橄榄球、足球、篮球等比赛的数据，在这些数据之上建立网络，并基于竞争关系来对选手进行排序。
 
-Second, we want to dig into baseball networks, including study of
-relationships between players' salaries and their rankings, prediction
-of players' overall and play-specific performance, and study the impact
-of real-time events to the evaluation process.
+其次，我们想要更多地研究棒球网络，包括研究选手薪水和排名的关系，研究实时事件对评估过程的影响，研究在赛季中动态维护计算GameRank的方法等等。我们在这里提出一些具体的方向和方法：
 
-Besides, we want to build heterogeneous sports networks considering
-other relationships than competitions. Specifically, we want to consider
-supportive relationships and model their coexistence with competitions
-on the network.
+#. 在一个赛季中，比赛数据往往是实时更新的，一个排名的重要应用就是在数据更新时能够快速计算、实时反映选手的变化。增量计算对于GameRank而言是可行的：只需要在网络的边进行更新后，基于上一次的计算结果继续进行算法迭代，直到收敛。可以证明，由于网络拓扑结构变化不大，基于上一次迭代结果继续迭代将比重新开始迭代的收敛迅速很多，而且结果一致。
+#. 为了使GameRank更有实时参考性，反应选手的近期水平，我们可以通过简单的改变边权，来做到这一点。具体做法为：将边的权值统一乘以一个*时间衰减系数*，让越早的局面权值越低，对评估的贡献越小；越近的局面权值越高，对评估的贡献越大。这样算出来的GameRank就可以更好地反应选手的近期水平。
+
+此外，我们希望利用网络模型，预测选手的综合表现、选手对选手的胜率。如何预测一个局面下，竞争双方选手取胜的概率？如果是两个交战过多次的选手，只需观察历史胜率；问题是有些情况下，两个选手从未碰面过，或碰面次数少。我们考虑用一个*协同过滤*的推荐模型，找到与这两个选手相似的选手，以及相似的当前局面状况等，用他们的情况来预测这两名选手的竞争结果。
+
+最后，我们希望扩展网络模型，考虑除竞争之外的其他关系。具体地，我们希望考虑球员之间的合作关系，将合作与竞争共同带入一个异构网络，进行更为真实的建模与研究。
