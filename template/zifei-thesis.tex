@@ -13,8 +13,8 @@
 
 % 在黑白打印时彩色链接可能变成浅灰色，此时可将“colorlinks”改为“nocolorlinks”。
 % \documentclass[UTF8, colorlinks]{pkuthss}
-% \documentclass[UTF8, colorlinks, adobefonts]{pkuthss}
 \documentclass[UTF8, colorlinks, adobefonts]{pkuthss}
+% \documentclass[UTF8, nocolorlinks, adobefonts]{pkuthss}
 
 % 使用 biblatex 排版参考文献，并规定其格式。
 % 默认按照引用顺序排序（“sorting = none”），详见 biblatex-caspervector 的文档
@@ -28,6 +28,8 @@
 \usepackage{amssymb}
 % 提供 Verbatim 环境和 \VerbatimInput 命令。
 \usepackage{fancyvrb}
+
+\renewcommand{\cite}{\parencite}  % 临时，全加上方括号
 
 \usepackage[ruled,lined]{algorithm2e}
 \usepackage{tabularx}
@@ -110,7 +112,7 @@
 	\input{tex/application}
 	\input{tex/eval}
 	\input{tex/anal}
-	% \input{tex/5.visual}
+	\input{tex/visual}
 	% \input{tex/6.other}
 	\input{tex/future}
 	\input{tex/conc}
@@ -149,7 +151,7 @@
 	\backmatter
 
 	% 致谢。
-	% \include{chap/acknowledge}
+	\include{tex/acknowledge}
 	% 原创性声明和使用授权说明。
 	\include{chap/originauth}
 

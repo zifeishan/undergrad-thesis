@@ -41,12 +41,20 @@ endif
 
 all: tex img doc clean
 
+print: all
+	pdftk advisor.pdf zifei-thesis.pdf output zifei-thesis-print.pdf
+
 pre: template/$(JOBNAME).tex tex
 	$(LATEX) template/$(JOBNAME)
 
-tex: abstract intro related algo applic eval anal future conclusion
+tex: abstract intro related algo applic eval anal visual future conclusion acknowledge
 # technical evaluation related conclusion appendix
 
+visual: md/visual.md
+	pandoc md/visual.md -o tex/visual.tex
+
+acknowledge: md/acknowledge.md
+	pandoc md/acknowledge.md -o tex/acknowledge.tex
 applic: md/application.md
 	pandoc md/application.md -o tex/application.tex
 abstract: md/abstract.md
