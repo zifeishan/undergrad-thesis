@@ -1,0 +1,118 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                Zifei's Graduate Statement SHORT version
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt,a4paper]{article}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+% \usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+% \usepackage{float}
+\usepackage{fontspec}
+\newfontfamily\zhfont[BoldFont=Adobe Heiti Std]{Adobe Song Std}
+\newfontfamily\zhpunctfont{Adobe Song Std}
+\setmainfont{Times New Roman}
+\usepackage{indentfirst}
+\usepackage{zhspacing}
+\zhspacing
+
+
+% \documentclass[12pt,a4paper]{article}
+% \documentclass[11pt,letterpaper]{article}
+% \documentclass[11pt,twocolumn,letterpaper]{article}
+\listfiles
+
+% List of additional packages
+\usepackage{graphicx} % Graphics support
+\usepackage{color} % Color support
+\usepackage{hyperref} % Internal/external hyperlinks
+\usepackage{hyphenat} % Improved hyphenation control
+\usepackage{url} % Improved urls
+\usepackage{xspace} % Smart spacings
+\usepackage{microtype} % Margin kerning / font expansion
+
+\usepackage{titlesec} % Improved control over section headings
+\usepackage{fancyhdr} % Improved control over headers / footers
+\usepackage{mathptmx} % Narrow font, designed for multiple columns
+\usepackage{wrapfig} % Text-wrap around figures
+
+\usepackage{lastpage} % get the last page number
+
+\usepackage{flushend} % Manually equalize the lengths of two columns on the last page of your paper;
+
+% Define hyperref parameters
+\hypersetup{
+% pdftitle={\Title},
+pdfauthor={Zifei Shan},
+colorlinks=True,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,urlcolor=black,pdfstartview=FitH}
+
+\usepackage[top=1in, bottom=1in, left=1in,right=1in, includeheadfoot]{geometry}
+
+\setlength{\headheight}{28pt}  % modification suggested by the compiler
+
+% Define leading between lines (to help squeeze onto one page)
+\renewcommand{\baselinestretch}{1.2}
+
+% Define custom section command via 'titlesec' package
+% \titleformat{\section}[runin]{\normalfont}{\indent}{0em}{\bfseries}[:]
+\titlespacing{\section}{0em}{0.3em}{0.5em}
+
+% Ensure that pages are typeset for letter output
+\pdfpagewidth=8.5 true in
+\pdfpageheight=11 true in
+
+% Customize header to display title / author information
+\pagestyle{fancy}
+\fancyhf[HR]{}
+% \textbf{\headerX{}}\quad\\
+% \small\headerY{}}
+
+\fancyhf[HL]{
+\includegraphics[height=8mm]{img/pku_logo.eps} 
+\begin{tabular}[b]{l}
+  \textbf{GameRank: 一种面向体育竞技比赛的选手排名算法设计与实现}\\
+  单子非 \quad 00948181 \quad 信息科学技术学院
+\end{tabular}}
+
+\widowpenalty=500
+
+\title{GameRank: 一种面向体育竞技比赛的选手排名算法设计与实现}
+\author{{单子非 \quad 00948181 \quad 信息科学技术学院}}
+\date{}
+
+% Start document
+\begin{document}
+% \quad\\[1ex]
+% \maketitle
+
+\input{abs-cont}
+
+\end{document}
+
+
+% % Title portion
+% \title{Study Plan}
+% \author{Zifei Shan}
+% % \institute{Faculty of Electrical Engineering\\Technion --- Israel Institute of Technology}
+
+% \maketitle
+
+% % \begin{abstract}
+% % \input{tex/abstract}
+% % \end{abstract}
+
+% \input{study-plan}
+% % \input{tex/background}
+% % \input{tex/technical}
+% % \input{tex/evaluation}
+% % \input{tex/related}
+% % \input{tex/conclusion}
+
+% % \input{tex/appendix}
+
+% % \bibliographystyle{abbrv}
+% % \bibliography{tex/all}
+
+% \end{document}
