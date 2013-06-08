@@ -6,41 +6,30 @@
 \label{sec:conc} -->
 
 在本文中，我们展示了一个通用的竞技体育网络模型，其中结点为选手，边为选手之间的竞争关系，不同角色的选手之间存在不同的竞争。
-在这个网络上，我们设计了GameRank
+在这个网络上，我们设计了GameRank---一个通用的基于竞争关系的选手排序算法，
+它的基本思想为：强大的选手能够战胜强大的对手。
+GameRank应用了一个随机行走模型，来考虑对手的实力对评估选手的影响，以准确把握这一基本思想。
 
-In this paper we present a generic network model on competitive sports,
-with players as nodes and their competitions as links. We model the
-network with different competitions between different player roles, and
-design *GameRank*, an universal algorithm to rank players by
-competitions, with the network perspective. GameRank has an intuition
-that "players that defeat strong opponents are strong". It adopts a
-random walk model to consider the impact of their components in the
-process to evaluate players.
+我们将 GameRank 应用在棒球比赛上，分析了美国职业棒球大联盟(MLB)的大规模数据集。
+我们解析数据集生成了比赛网络，评估了球员的投球和打击能力，将1921年到2012年的选手投球和打击能力加以排名。
 
-We apply GameRank on baseball to to analyze the complex statistics of
-MLB data, constructing competition networks to evaluate players'
-pitching and batting abilities. We rank the MLB networks from 1921 to
-2012, and evaluate the algorithm by comparing its results to other
-famous rankings. It turns out that our model is excellent in the
-following aspects: first, we get the similar results with some
-prestigious ranks. Second, our method use a simple network model
-considering player relationships. Third, our method is capable of
-calculating every player's rankings, while others cannot give a score to
-each player.
+我们还应用这一棒球数据集对GameRank的效果进行了评估。评估方法为，比较GameRank和其他现行的著名排名方法的排名结果。结果从多个方面表明GameRank有出色的表现：
 
-We then analyze baseball networks based on results of GameRank. We find
-that the nodes and links in baseball networks have been increasing, but
-the density has been decreasing. We find that according to wining-rate
-analysis, GameRank is not better ordered than other rankings, but it
-supports the fact that we consider player relationships rather than mere
-statistics. We further find that most players only appear on Top-10 list
-once, but there are 10 players who have achieved Top-10 more than 10
-times. In addition, few players who started to play between
-1968 to 1983 have ever achieved a Top-10.
+#. GameRank与其他排名方法产生了相似的结果。 
+#. 通过分析不同投手和打击员交手的胜率，进行逆序对计数，我们发现GameRank更满足"高排名的对手比低排名的对手更难战胜"这一规律，因此它比其他排名方法更加有序。
+#. GameRank使用了强大的网络模型，可以考虑球员之间的关系。
+#. GameRank可以将所有球员进行排名，而有些排名方法只能排名部分球员。
+ 
 
-Our contribution lies in following aspects: (1) we propose a  novel
-abstraction of universal competitions in games; (2) we give an accurate
-player-ranking approach considering competition relationships among
-players, which may impact sport-game analysis and team management; (3)
-we conduct analysis of large-scale sports data with our network model
-and ranking algorithm.
+接着，我们使用排名信息分析了棒球网络的数据。我们发现：
+一、球员水平在逐年接近。
+二、分析投手的打击能力：投球能力越高的投手，打击能力往往也越高。
+三、棒球网络中的结点数（球员数）和边数都在逐年增长，但网络密度在逐年减小。
+四、大部分进入GameRank前十名球员，只在前十榜中只出现过一次，但历史上有10名球员上榜了超过10次。
+五、1968--1983 年间出道的球员中，上过前十榜的球员异常地少。
+
+我们的贡献主要体现在以下方面：
+一、我们创新地提出了通用竞技比赛的网络模型；
+二、我们提出了更准确的选手排名的算法，创新地考虑了对手实力对选手评估的影响；
+三、我们进行了大规模棒球数据的网络分析和排名，发现了诸多规律和现象。
+
